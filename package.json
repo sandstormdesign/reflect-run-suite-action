@@ -1,0 +1,25 @@
+{
+  "name": "reflect-run-test-action",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "GitHub Action for running a Reflect (https://reflect.run) test",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js --license licenses.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PropFuel/reflect-run-test-action.git"
+  },
+  "author": "Sebastian Marulanda <sebastian@propfuel.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/PropFuel/reflect-run-test-action#readme",
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "axios": "^1.6.8",
+    "js-yaml": "^4.1.0"
+  }
+}

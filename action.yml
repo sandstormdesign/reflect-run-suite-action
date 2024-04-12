@@ -1,0 +1,26 @@
+name: "Run a Reflect Test"
+description: "Run a Reflect (https://reflect.run) test"
+author: "Sebastian Marulanda <sebastian@propfuel.com>"
+inputs:
+  api-key:
+    description: "Your Reflect API key (https://app.reflect.run/settings/account)"
+    required: true
+  test-id:
+    description: "The ID of the test to run"
+    required: true
+  variables:
+    description: "A YAML document of ('name', 'definition') variable overrides to apply to this scheduled execution"
+    required: false
+  wait-for-completion:
+    description: Wait for the test to complete before continuing
+    required: false
+    default: false
+outputs:
+  execution:
+    description: "A JSON object containing the execution details"
+runs:
+  using: "node20"
+  main: "dist/index.js"
+branding:
+  icon: check-circle
+  color: green
