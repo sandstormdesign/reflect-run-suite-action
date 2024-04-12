@@ -37527,25 +37527,47 @@ try {
     },
   });
 
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info("Scheduling the test for immediate execution...");
+
   // Schedule the test
   const response = await api.post(`tests/${testId}/executions`, {
     variables,
   });
 
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info("Running the test...");
+
   // Get the execution ID
   const { executionId } = response.data;
+
+  if (waitForCompletion) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info("Waiting for test completion..");
+  }
 
   // Loop until the execution is complete
   while (true) {
     // Fetch the latest execution status
     const { data: execution } = await api.get(`executions/${executionId}`);
 
-    // Check if we're skipping the wait, or if all tests have been run
-    if (!waitForCompletion || execution.tests.every((test) => test.run)) {
-      // Set the output
+    // Check if we're skipping the wait
+    if (!waitForCompletion) {
       _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("execution", execution);
+      break;
+    }
 
-      // Exit the loop
+    // Check if every test has been run
+    if (execution.tests.every((test) => test.run)) {
+      // Check for a failed test
+      const failed = execution.tests.find((test) => test.status === "failed");
+
+      if (failed) {
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(
+          `Test failed. View results: https://app.reflect.run/tests/${failed.testId}/runs/${failed.run.runId}.`
+        );
+      } else {
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.info("Test completed successfully.");
+        _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("execution", execution);
+      }
+
       break;
     }
 
