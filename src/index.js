@@ -30,7 +30,7 @@ try {
   const { executionId } = response.data;
 
   if (waitForCompletion) {
-    core.info("Waiting for test completion..");
+    core.info("Waiting for test completion...");
   }
 
   // Loop until the execution is complete
@@ -51,7 +51,7 @@ try {
 
       if (failed) {
         core.setFailed(
-          `Test failed. View results: https://app.reflect.run/tests/${failed.testId}/runs/${failed.run.runId}.`
+          `Test failed. Results: https://app.reflect.run/tests/${failed.testId}/runs/${failed.run.runId}`
         );
       } else {
         core.info("Test completed successfully.");
