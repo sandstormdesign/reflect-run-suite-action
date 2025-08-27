@@ -5,7 +5,7 @@ import yaml from "js-yaml";
 try {
   // Get input values
   const apiKey = core.getInput("api-key", { required: true });
-  const testId = core.getInput("test-id", { required: true });
+  const suiteId = core.getInput("suite-id", { required: true });
   const variables = yaml.load(core.getInput("variables")) || {};
   const waitForCompletion = core.getBooleanInput("wait-for-completion");
 
@@ -17,26 +17,26 @@ try {
     },
   });
 
-  core.info("Scheduling the test for immediate execution...");
+  core.info("Scheduling the test suite for immediate execution...");
 
   // Schedule the test
-  const response = await api.post(`tests/${testId}/executions`, {
+  const response = await api.post(`suites/${suiteId}/executions`, {
     variables,
   });
 
-  core.info("Running the test...");
+  core.info("Running the test suite...");
 
   // Get the execution ID
   const { executionId } = response.data;
 
   if (waitForCompletion) {
-    core.info("Waiting for test completion...");
+    core.info("Waiting for test suite completion...");
   }
 
   // Loop until the execution is complete
   while (true) {
     // Fetch the latest execution status
-    const { data: execution } = await api.get(`executions/${executionId}`);
+    const { data: execution } = await api.get(`suites/${suiteId}/executions/${executionId}`);
 
     // Check if we're skipping the wait
     if (!waitForCompletion) {
@@ -45,16 +45,16 @@ try {
     }
 
     // Check if every test has been run
-    if (execution.tests.every((test) => test.run)) {
+    if (execution.isFinished) {
       // Check for a failed test
-      const failed = execution.tests.find((test) => test.status === "failed");
+      const failed = execution.status === "failed";
 
       if (failed) {
         core.setFailed(
-          `Test failed. Results: https://app.reflect.run/tests/${failed.testId}/runs/${failed.run.runId}`
+          `Test suite failed. Results: https://app.reflect.run/suites/${suiteId}/executions/${executionId}`
         );
       } else {
-        core.info("Test completed successfully.");
+        core.info("Test suite completed successfully.");
         core.setOutput("execution", execution);
       }
 
