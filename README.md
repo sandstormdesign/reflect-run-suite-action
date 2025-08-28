@@ -8,9 +8,9 @@ This action runs a Reflect (https://reflect.run) test.
 
 **Required** Your Reflect API key (https://app.reflect.run/settings/account).
 
-### `test-id`
+### `suite-id`
 
-**Required** The ID of the test to run.
+**Required** The ID of the test suite to run.
 
 ### `variables`
 
@@ -18,9 +18,9 @@ A YAML document of `key: value` variable overrides to apply to this scheduled ex
 
 ### `wait-for-completion`
 
-Wait for the test to complete before continuing.
+Wait for the test suite to complete before continuing.
 
-default: `false`
+default: `true`
 
 ## Outputs
 
@@ -54,10 +54,10 @@ A JSON object containing the execution details.
 
 ```yaml
 name: Run a Relfect test
-uses: PropFuel/reflect-run-test-action@main
+uses: sandstormdesign/reflect-run-suite-action@main
 with:
   api-key: ${{ secrets.REFLECT_API_KEY }}
-  test-id: 1690
+  suite-id: 1690
   variables: |
     FOO: bar
     BAZ: qux
