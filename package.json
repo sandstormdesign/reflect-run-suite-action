@@ -1,19 +1,19 @@
 {
-  "name": "reflect-run-test-action",
+  "name": "reflect-run-suite-action",
   "type": "module",
   "version": "1.0.0",
-  "description": "GitHub Action for running a Reflect (https://reflect.run) test",
+  "description": "GitHub Action for running a Reflect (https://reflect.run) test suite",
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.js --license licenses.txt"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PropFuel/reflect-run-test-action.git"
+    "url": "git+https://github.com/sandstormdesign/reflect-run-suite-action.git"
   },
-  "author": "Sebastian Marulanda <sebastian@propfuel.com>",
+  "author": "John Brooks <jbrooks@sandstormdesign.com>",
   "license": "MIT",
-  "homepage": "https://github.com/PropFuel/reflect-run-test-action#readme",
+  "homepage": "https://github.com/sandstormdesign/reflect-run-suite-action#readme",
   "devDependencies": {
     "@vercel/ncc": "^0.38.1"
   },
