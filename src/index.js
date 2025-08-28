@@ -7,7 +7,7 @@ try {
   const apiKey = core.getInput("api-key", { required: true });
   const suiteId = core.getInput("suite-id", { required: true });
   const variables = yaml.load(core.getInput("variables")) || {};
-  const waitForCompletion = core.getBooleanInput("wait-for-completion");
+  const waitForCompletion = core.getBooleanInput("wait-for-completion") || true;
 
   // Reflect API client
   const api = axios.create({
