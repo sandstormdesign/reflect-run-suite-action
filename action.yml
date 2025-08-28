@@ -1,11 +1,11 @@
-name: "Run a Reflect Test"
-description: "Run a Reflect (https://reflect.run) test"
-author: "Sebastian Marulanda <sebastian@propfuel.com>"
+name: "Run a Reflect Test Suite"
+description: "Run a Reflect (https://reflect.run) test suite"
+author: "John Brooks <jbrooks@sandstormdesign.com>"
 inputs:
   api-key:
     description: "Your Reflect API key (https://app.reflect.run/settings/account)"
     required: true
-  test-id:
+  suite-id:
     description: "The ID of the test to run"
     required: true
   variables:
@@ -14,7 +14,7 @@ inputs:
   wait-for-completion:
     description: Wait for the test to complete before continuing
     required: false
-    default: false
+    default: true
 outputs:
   execution:
     description: "A JSON object containing the execution details"
