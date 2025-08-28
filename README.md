@@ -127,7 +127,7 @@ A JSON object containing the execution details.
 name: Run a Relfect test
 uses: sandstormdesign/reflect-run-suite-action@main
 with:
-  api-key: ${{ secrets.REFLECT_API_KEY }}
+  api-key: ${{ secrets.REFLECT_DOT_RUN_API_KEY }}
   suite-id: 1690
   variables: |
     FOO: bar
